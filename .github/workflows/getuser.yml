@@ -18,5 +18,11 @@ jobs:
           audience: api://AzureADTokenExchange
           # OIDC Scope, # optional, default is https://graph.microsoft.com/.default
           scope: https://graph.microsoft.com/.default
-          
+
+    - name: 'Get my info'
+      run: |
+          Install-Module -Name Microsoft.Graph.Authentication
+          Connect-MgGraph -AccessToken $env:ACCESS_TOKEN
+          Invoke-MgGraphRequest -Uri '/beta/me'
+      shell: pwsh
   
