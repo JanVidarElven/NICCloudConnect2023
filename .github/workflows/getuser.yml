@@ -22,7 +22,8 @@ jobs:
     - name: 'Get my info'
       run: |
           Install-Module -Name Microsoft.Graph.Authentication
-          Connect-MgGraph -AccessToken $env:ACCESS_TOKEN
+          $secureToken = ConvertTo-SecureString -String $env:ACCESS_TOKEN -AsPlainText -Force
+          Connect-MgGraph -AccessToken $secureToken
           Invoke-MgGraphRequest -Uri '/beta/me'
       shell: pwsh
   
