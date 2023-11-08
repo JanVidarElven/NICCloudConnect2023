@@ -24,6 +24,5 @@ jobs:
           Install-Module -Name Microsoft.Graph.Authentication
           $secureToken = ConvertTo-SecureString -String $env:ACCESS_TOKEN -AsPlainText -Force
           Connect-MgGraph -AccessToken $secureToken
-          Invoke-MgGraphRequest -Uri '/beta/users/jan.vidar@elven.no'
       shell: pwsh
   
