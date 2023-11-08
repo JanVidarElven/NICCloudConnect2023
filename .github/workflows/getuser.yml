@@ -19,11 +19,11 @@ jobs:
           # OIDC Scope, # optional, default is https://graph.microsoft.com/.default
           scope: https://graph.microsoft.com/.default
 
-    - name: 'Get my info'
+    - name: 'Get user info'
       run: |
           Install-Module -Name Microsoft.Graph.Authentication
           $secureToken = ConvertTo-SecureString -String $env:ACCESS_TOKEN -AsPlainText -Force
           Connect-MgGraph -AccessToken $secureToken
-          Invoke-MgGraphRequest -Uri '/beta/me'
+          Invoke-MgGraphRequest -Uri '/beta/users/jan.vidar@elven.no'
       shell: pwsh
   
