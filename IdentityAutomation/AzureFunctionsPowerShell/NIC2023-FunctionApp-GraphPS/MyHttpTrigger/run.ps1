@@ -19,12 +19,14 @@ if ($env:MSI_SECRET) {
     Connect-MgGraph -scopes "User.Read.All"
 }
 
-Get-MgUser -Search "displayName:$($name)" -ConsistencyLevel eventual
+$users = Get-MgUser -Search "displayName:$($name)" -ConsistencyLevel eventual
+
+$users = $users | Select-Object -Property DisplayName, UserPrincipalName, Id
 
 $body = "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
 
 if ($name) {
-    $body = "Hello, $name. This HTTP triggered function executed successfully."
+    $body = $users
 }
 
 # Associate values to output bindings by calling 'Push-OutputBinding'.
