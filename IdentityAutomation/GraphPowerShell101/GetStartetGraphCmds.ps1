@@ -28,7 +28,8 @@ Connect-MgGraph -UseDeviceAuthentication
 
 # Access token: 
 $AccessToken = "YOUR_ACCESS_TOKEN"
-Connect-MgGraph -AccessToken $AccessToken
+$secureToken = ConvertTo-SecureString -String $AccessToken -AsPlainText -Force
+Connect-MgGraph -AccessToken $secureToken
 
 # Application:
 $ClientId = "YOUR_APP_ID"

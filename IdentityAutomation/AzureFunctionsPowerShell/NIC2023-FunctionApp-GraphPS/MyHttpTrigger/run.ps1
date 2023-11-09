@@ -12,7 +12,12 @@ if (-not $name) {
     $name = $Request.Body.Name
 }
 
-Connect-MgGraph -scopes "User.Read.All"
+# If running in Function App, connect with Managed Identity, else connect interactively.
+if ($env:MSI_SECRET) {
+    Connect-MgGraph -Identity
+} else {
+    Connect-MgGraph -scopes "User.Read.All"
+}
 
 Get-MgUser -Search "displayName:$($name)" -ConsistencyLevel eventual
 
